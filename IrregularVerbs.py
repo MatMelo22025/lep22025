@@ -1,3 +1,5 @@
+import random
+
 verbos = {
     "arise": ("arose", "arisen"),
     "be": ("was/were", "been"),
