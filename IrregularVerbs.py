@@ -46,16 +46,33 @@ verbos = {
 print("Treino de Verbos Irregulares em Inglês!")
 print("Digite 'sair' para encerrar.\n")
 
-while True:
+def atualizar_pontuacao(acertos):
+    return acertos + 1
+
+print("Treino de Verbos Irregulares - 10 Rodadas!")
+print("-------------------------------------------")
+
+pontuacao = 0
+rodadas = 10
+
+for rodada in range(1, rodadas + 1):
+    print(f"\nRodada {rodada}/{rodadas}")
+    
     verbo = random.choice(list(verbos.keys()))
-    correto_past, correto_participle = verbos[verbo]
+    correto_past, correto_part = verbos[verbo]
 
-    print(f"\nVerbo: {verbo}")
+    print(f"Verbo: {verbo}")
 
-    resposta_past = input("Simple Past: ").strip().lower()
-    if resposta_past == "sair":
-        break
+    resp_past = input("Simple Past: ").strip().lower()
+    resp_part = input("Past Participle: ").strip().lower()
 
-    resposta_part = input("Past Participle: ").strip().lower()
-    if resposta_part == "sair":
-        break
+    if resp_past == correto_past and resp_part == correto_part:
+        print("Acertou!")
+        pontuacao = atualizar_pontuacao(pontuacao)
+    else:
+        print("Errou.")
+        print(f"O correto é: {correto_past} / {correto_part}")
+
+print("\n-------------------------------------------")
+print(f"Jogo encerrado! Sua pontuação final: {pontuacao} de {rodadas}")
+print("-------------------------------------------")
