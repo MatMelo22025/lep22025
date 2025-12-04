@@ -1,4 +1,14 @@
 import random
+import os
+import platform
+
+def limpar_tela():
+    sistema = platform.system()
+
+    if sistema == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
 
 verbos = {
     "arise": ("arose", "arisen"),
@@ -46,33 +56,48 @@ verbos = {
 print("Treino de Verbos Irregulares em Inglês!")
 print("Digite 'sair' para encerrar.\n")
 
-def atualizar_pontuacao(acertos):
-    return acertos + 1
+def atualizar_pontuacao(pontos):
+    return pontos + 1
 
-print("Treino de Verbos Irregulares - 10 Rodadas!")
-print("-------------------------------------------")
 
-pontuacao = 0
-rodadas = 10
+def jogar():
+    limpar_tela()
+    print("Treino de Verbos Irregulares – 10 Rodadas!")
+    print("--------------------------------------------")
 
-for rodada in range(1, rodadas + 1):
-    print(f"\nRodada {rodada}/{rodadas}")
-    
-    verbo = random.choice(list(verbos.keys()))
-    correto_past, correto_part = verbos[verbo]
+    pontuacao = 0
+    rodadas = 10
 
-    print(f"Verbo: {verbo}")
+    for rodada in range(1, rodadas + 1):
+        print(f"\nRodada {rodada}/{rodadas}")
+        
+        verbo = random.choice(list(verbos.keys()))
+        correto_past, correto_part = verbos[verbo]
 
-    resp_past = input("Simple Past: ").strip().lower()
-    resp_part = input("Past Participle: ").strip().lower()
+        print(f"Verbo: {verbo}")
 
-    if resp_past == correto_past and resp_part == correto_part:
-        print("Acertou!")
-        pontuacao = atualizar_pontuacao(pontuacao)
-    else:
-        print("Errou.")
-        print(f"O correto é: {correto_past} / {correto_part}")
+        resp_past = input("Simple Past: ").strip().lower()
+        resp_part = input("Past Participle: ").strip().lower()
 
-print("\n-------------------------------------------")
-print(f"Jogo encerrado! Sua pontuação final: {pontuacao} de {rodadas}")
-print("-------------------------------------------")
+        if resp_past == correto_past and resp_part == correto_part:
+            print("Acertou!")
+            pontuacao = atualizar_pontuacao(pontuacao)
+        else:
+            print("Errou.")
+            print(f"O correto é: {correto_past} / {correto_part}")
+
+    print("\n--------------------------------------------")
+    print(f"Sua pontuação final: {pontuacao} de {rodadas}")
+    print("--------------------------------------------")
+
+
+# Loop principal (menu)
+while True:
+    jogar()
+    opcao = input("\nDeseja jogar novamente? (s/n): ").strip().lower()
+
+    if opcao != "s":
+        print("\nSaindo... Até a próxima!")
+        break
+
+    limpar_tela()
